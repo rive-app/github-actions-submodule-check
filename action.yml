@@ -1,0 +1,23 @@
+name: 'Check submodule against its repo'
+description: 'Compare the hash of a linked submodule's, to that of the main branch of its repository'
+inputs:
+  REPO_GIT_URL:  
+    description: 'https://...(name).git for the repo targeted by submodule'
+    required: true
+  REPO_MAIN_BRANCH:  
+    description: 'branch to check'
+    required: true
+    default: 'master'
+  SLACK_WEBHOOK:  
+    description: 'The slack webhook to use for alerting if we are behind'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: sh check.sh
+      env:
+        REPO_GIT_URL: ${{ inputs.REPO_GIT_URL }}
+        REPO_MAIN_BRANCH: ${{ inputs.REPO_MAIN_BRANCH }}
+        NAME: ${{ github.repository }}
+        SLACK_WEBHOOK: ${{ inputs.SLACK_WEBHOOK }}
+      shell: bash

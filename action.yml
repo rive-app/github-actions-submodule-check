@@ -1,5 +1,5 @@
 name: 'Check submodule against its repo'
-description: 'Compare the hash of a linked submodule's, to that of the main branch of its repository'
+description: 'Compare the hash of a linked submodule, to that of the main branch of its repository'
 inputs:
   REPO_GIT_URL:  
     description: 'https://...(name).git for the repo targeted by submodule'

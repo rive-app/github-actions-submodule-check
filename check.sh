@@ -4,8 +4,12 @@ set -e
 # REPO_URL=https://github.com/rive-app/rive-cpp.git
 # REPO_MAIN_BRANCH=master
 # NAME=rive-app/rive-ios
+# WORKSPACE=.
 
 # Get the hash of the repo.
+
+pushd $WORKSPACE
+
 REPO_HASH=$(git ls-remote $REPO_URL refs/heads/$REPO_MAIN_BRANCH | awk '{print $1}')
 echo $REPO_URL:$REPO_MAIN_BRANCH is at $REPO_HASH
 

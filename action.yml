@@ -14,10 +14,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: sh check.sh
+    - run: sh ${{ github.action_path }}/check.sh
       env:
         REPO_GIT_URL: ${{ inputs.REPO_GIT_URL }}
         REPO_MAIN_BRANCH: ${{ inputs.REPO_MAIN_BRANCH }}
         NAME: ${{ github.repository }}
         SLACK_WEBHOOK: ${{ inputs.SLACK_WEBHOOK }}
+        WORKSPACE: ${{github.workspace}}
+        
       shell: bash

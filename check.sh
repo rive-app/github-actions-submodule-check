@@ -8,7 +8,7 @@ set -e
 
 # Get the hash of the repo.
 
-pushd $WORKSPACE
+cd $WORKSPACE
 
 REPO_HASH=$(git ls-remote $REPO_URL refs/heads/$REPO_MAIN_BRANCH | awk '{print $1}')
 echo $REPO_URL:$REPO_MAIN_BRANCH is at $REPO_HASH

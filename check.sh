@@ -1,7 +1,7 @@
 set -e
 
 # For testing.
-# REPO_URL=https://github.com/rive-app/rive-cpp.git
+# REPO_GIT_URL=https://github.com/rive-app/rive-cpp.git
 # REPO_MAIN_BRANCH=master
 # NAME=rive-app/rive-ios
 # WORKSPACE=.
@@ -10,10 +10,10 @@ set -e
 
 cd $WORKSPACE
 
-REPO_HASH=$(git ls-remote $REPO_URL refs/heads/$REPO_MAIN_BRANCH | awk '{print $1}')
-echo $REPO_URL:$REPO_MAIN_BRANCH is at $REPO_HASH
+REPO_HASH=$(git ls-remote $REPO_GIT_URL refs/heads/$REPO_MAIN_BRANCH | awk '{print $1}')
+echo $REPO_GIT_URL:$REPO_MAIN_BRANCH is at $REPO_HASH
 
-REPO_NAME=$(echo $REPO_URL | sed -En 's/.*\/(.*).git/\1/p')
+REPO_NAME=$(echo $REPO_GIT_URL | sed -En 's/.*\/(.*).git/\1/p')
 
 
 # GET hash of Submodule.

@@ -1,10 +1,10 @@
 name: 'Check submodule against its repo'
 description: 'Compare the hash of a linked submodule, to that of the main branch of its repository'
 inputs:
-  REPO_GIT_URL:  
+  SUBMODULE_GIT_URL:  
     description: 'https://...(name).git for the repo targeted by submodule'
     required: true
-  REPO_MAIN_BRANCH:  
+  SUBMODULE_MAIN_BRANCH:  
     description: 'branch to check'
     required: true
     default: 'master'
@@ -16,10 +16,10 @@ runs:
   steps:
     - run: sh ${{ github.action_path }}/check.sh
       env:
-        REPO_GIT_URL: ${{ inputs.REPO_GIT_URL }}
-        REPO_MAIN_BRANCH: ${{ inputs.REPO_MAIN_BRANCH }}
+        SUBMODULE_GIT_URL: ${{ inputs.SUBMODULE_GIT_URL }}
+        SUBMODULE_MAIN_BRANCH: ${{ inputs.SUBMODULE_MAIN_BRANCH }}
         NAME: ${{ github.repository }}
         SLACK_WEBHOOK: ${{ inputs.SLACK_WEBHOOK }}
         WORKSPACE: ${{github.workspace}}
-        
+
       shell: bash

@@ -31,6 +31,7 @@ else
 
     cd $SUBMODULE_LOCATION
     echo $(pwd)
+    git submodule set-url $SUBMODULE_LOCATION $SUBMODULE_GIT_URL
     git submodule update --init
     echo $(git log)
 

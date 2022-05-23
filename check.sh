@@ -28,8 +28,8 @@ then
 else 
     SUBMODULE_LOCATION=$(git submodule | grep $REPO_NAME |awk '{print $2}' | sed -En 's/-*(.*)/\1/p')
 
-
-    git submodule set-url $SUBMODULE_LOCATION $SUBMODULE_GIT_URL
+    # its always submodules/$REPO_NAME, even if the submodule is located at a different path.
+    git submodule set-url submodules/$REPO_NAME $SUBMODULE_GIT_URL
     git submodule update --init $SUBMODULE_LOCATION
 
     cd $SUBMODULE_LOCATION
@@ -40,7 +40,7 @@ else
     echo "git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH"
     DIFF_COUNT=$(git fetch && git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH | awk '{print $2}')
     echo '{"text":" `'$NAME'` is behind `'$REPO_NAME'` by <'$DIFF_URL'|'$DIFF_COUNT' commit(s)>."}'
-    
+
     # Just full on assuming this is behind for the time being. 
     # Could put in some 'useful' links into this message. Once we have something useful to do (other than update & rebuild)
     curl -X POST -H 'Content-type: application/json' --data '{"text":" `'$NAME'` is behind `'$REPO_NAME'` by <'$DIFF_URL'|'$DIFF_COUNT' commit(s)>."}' $SLACK_WEBHOOK

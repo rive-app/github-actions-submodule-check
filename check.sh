@@ -32,9 +32,11 @@ else
     cd $SUBMODULE_LOCATION
     echo $(pwd)
     git pull
+    echo $(git log)
 
     # assuming rive-app
     DIFF_URL=https://github.com/rive-app/$REPO_NAME/compare/$SUBMODULE_HASH...$REPO_HASH
+    echo "git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH"
     DIFF_COUNT=$(git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH | awk '{print $2}')
     echo $DIFF_COUNT
     echo $DIFF_URL
@@ -42,7 +44,7 @@ else
     # Just full on assuming this is behind for the time being. 
     # Could put in some 'useful' links into this message. Once we have something useful to do (other than update & rebuild)
     # curl -X POST -H 'Content-type: application/json' --data '{"text":"`'"$NAME"'` is behind '"$REPO_NAME"'!"}' $SLACK_WEBHOOK
-    curl -X POST -H 'Content-type: application/json' --data '{"text":" `'$NAME'` is behind `'$REPO_NAME'` by <'$DIFF_URL'|'$DIFF_COUNT' commit(s)>."}' $SLACK_WEBHOOK
+    # curl -X POST -H 'Content-type: application/json' --data '{"text":" `'$NAME'` is behind `'$REPO_NAME'` by <'$DIFF_URL'|'$DIFF_COUNT' commit(s)>."}' $SLACK_WEBHOOK
     # echo '{"text":" `'$NAME'` is behind `'$REPO_NAME'` by <'$DIFF_URL'|'$DIFF_COUNT' commit(s)>."}'
 
 fi 

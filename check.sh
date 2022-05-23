@@ -27,12 +27,12 @@ then
     echo "They match. all is good"
 else 
     SUBMODULE_LOCATION=$(git submodule | grep $REPO_NAME |awk '{print $2}' | sed -En 's/-*(.*)/\1/p')
-    echo $SUBMODULE_LOCATION
+    
+
+    git submodule set-url $SUBMODULE_LOCATION $SUBMODULE_GIT_URL
+    git submodule update --init $SUBMODULE_LOCATION
 
     cd $SUBMODULE_LOCATION
-    echo $(pwd)
-    git submodule set-url $SUBMODULE_LOCATION $SUBMODULE_GIT_URL
-    git submodule update --init
     echo $(git log)
 
     # assuming rive-app

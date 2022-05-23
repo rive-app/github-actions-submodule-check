@@ -31,13 +31,13 @@ else
 
     cd $SUBMODULE_LOCATION
     echo $(pwd)
-    git pull
+    git submodule update --init
     echo $(git log)
 
     # assuming rive-app
     DIFF_URL=https://github.com/rive-app/$REPO_NAME/compare/$SUBMODULE_HASH...$REPO_HASH
     echo "git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH"
-    DIFF_COUNT=$(git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH | awk '{print $2}')
+    DIFF_COUNT=$(git fetch && git rev-list --left-right --count $SUBMODULE_HASH...$REPO_HASH | awk '{print $2}')
     echo $DIFF_COUNT
     echo $DIFF_URL
 
